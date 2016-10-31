@@ -29,12 +29,15 @@ var Main = React.createClass({
   render: function() {
     var loginOrOut;
     var register;
+    var home;
     if (this.state.loggedIn) {
       loginOrOut = <li><Link to="/logout">Logout</Link></li>;
-      register = null
+      register = null;
+      home = <Link to="/dashboard" className="navbar-brand">NoteAPP</Link>;
     } else {
       loginOrOut = <li><Link to="/login">Login</Link></li>;
       register = <li><Link to="/register">Register</Link></li>;
+      home = <Link to="/" className="navbar-brand">NoteAPP</Link>;
     }
     return (
       <span>
@@ -42,12 +45,11 @@ var Main = React.createClass({
           <div className="navbar-inner">
             <div className="container">
               <div className="navbar-header">
-                <Link to="/" className="navbar-brand">NoteAPP</Link>
+                {home}
               </div>
 
-              <div class="collapse navbar-collapse">
+              <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
-                  <li><Link to="/dashboard">Dashboard</Link></li>
                   {register}
                   {loginOrOut}
                 </ul>
