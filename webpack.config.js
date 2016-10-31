@@ -6,6 +6,9 @@ module.exports = {
     contentBase: "./public",
     hot: true
   },
+  eslint: {
+    configFile: './.eslintrc'
+  },
   output: {
     filename: "public/bundle.js"
   },
@@ -17,8 +20,19 @@ module.exports = {
     })
   ],
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      },
+    ],
     loaders: [
-    {test: /\.js$/, exclude: /node_modules/, loader: "babel"}
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel"
+      }
     ]
   }
 };
