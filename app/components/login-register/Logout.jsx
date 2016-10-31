@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 
-var Logout = React.createClass({
+const Logout = React.createClass({
   contextTypes: {
-    router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired,
   },
-  getInitialState: function(){
+
+  getInitialState() {
     return {
-      error: false
+      error: false,
     };
   },
-  componentDidMount: function () {
+
+  componentDidMount() {
     firebase.auth().signOut();
-    this.setState({loggedIn: false});
+    this.setState({ loggedIn: false });
     // this.context.router.replace('/');
   },
-  render: function () {
+
+  render() {
     return <p>You are now logged out</p>;
-  }
+  },
+
 });
 
 module.exports = Logout;

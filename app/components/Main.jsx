@@ -1,35 +1,37 @@
-var React = require('react');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Link = ReactRouter.Link;
 import * as firebase from 'firebase';
 
-var Main = React.createClass({
-  getInitialState: function() {
+const React = require('react');
+const ReactRouter = require('react-router');
+
+const Router = ReactRouter.Router;
+const Link = ReactRouter.Link;
+
+const Main = React.createClass({
+  getInitialState() {
     return {
-      loggedIn: (null !== firebase.auth().currentUser)
-    }
+      loggedIn: (firebase.auth().currentUser !== null),
+    };
   },
 
-  componentWillMount: function() {
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
       this.setState({
-        loggedIn: (null !== firebaseUser)
-      })
+        loggedIn: (firebaseUser !== null),
+      });
 
       if (firebaseUser) {
-        console.log("Logged IN", firebaseUser);
+        // console.log('Logged IN', firebaseUser);
       } else {
-        console.log('Not logged in');
+        // console.log('Not logged in');
       }
     });
   },
 
-  render: function() {
-    var loginOrOut;
-    var register;
-    var home;
+  render() {
+    let loginOrOut;
+    let register;
+    let home;
+
     if (this.state.loggedIn) {
       loginOrOut = <li><Link to="/logout">Logout</Link></li>;
       register = null;
@@ -63,8 +65,8 @@ var Main = React.createClass({
           </div>
         </div>
       </span>
-    )
-  }
+    );
+  },
 });
 
 module.exports = Main;

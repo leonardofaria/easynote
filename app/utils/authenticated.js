@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 // import * as firebase from 'firebase';
-import * as config from '../../firebase.config.js';
 import _ from 'lodash';
+import * as config from '../../firebase.config';
 // firebase.initializeApp(config);
-var Rebase = require('re-base');
-var firebase = Rebase.createClass(config);
+const Rebase = require('re-base');
+const firebase = Rebase.createClass(config);
 
 function requireAuth(nextState, replace) {
   const browserStorage = (typeof localStorage === 'undefined') ?

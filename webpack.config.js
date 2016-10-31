@@ -1,38 +1,41 @@
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: "./app/App.js",
+  entry: './app/App.js',
   devServer: {
-    contentBase: "./public",
-    hot: true
+    contentBase: './public',
+    hot: true,
   },
   eslint: {
-    configFile: './.eslintrc'
+    configFile: './.eslintrc',
   },
   output: {
-    filename: "public/bundle.js"
+    filename: 'public/bundle.js',
   },
   devtool: 'source-map',
   plugins: [
     new Dotenv({
       path: './.env', // if not simply .env
-      safe: true // lets load the .env.example file as well
-    })
+      safe: true, // lets load the .env.example file as well
+    }),
   ],
   module: {
     preLoaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
+        loader: 'eslint-loader',
       },
     ],
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "babel"
-      }
-    ]
-  }
+        loader: 'babel',
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
 };
