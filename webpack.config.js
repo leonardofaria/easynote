@@ -1,7 +1,11 @@
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './app/App.js',
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+    './app/App.js',
+  ],
   devServer: {
     contentBase: './public',
     hot: true,
@@ -32,6 +36,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel',
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass'],
       },
     ],
   },

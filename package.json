@@ -8,7 +8,7 @@
     "url": "https://github.com/leonardofaria/noteapp"
   },
   "scripts": {
-    "start": "webpack-dev-server --port 3000 --progress --colors"
+    "start": "webpack-dev-server --port 3000 --progress --colors --inline --hot"
   },
   "author": "Leonardo Faria",
   "dependencies": {
@@ -26,11 +26,16 @@
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.11.1",
+    "css-loader": "^0.25.0",
     "eslint": "^3.9.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-loader": "^1.6.0",
     "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
+    "node-sass": "^3.10.1",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   }
