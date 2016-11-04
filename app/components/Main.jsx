@@ -6,12 +6,19 @@ const ReactRouter = require('react-router');
 const Router = ReactRouter.Router;
 const Link = ReactRouter.Link;
 
-const Main = React.createClass({
-  getInitialState() {
-    return {
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       loggedIn: (firebase.auth().currentUser !== null),
     };
-  },
+  }
+
+  // getInitialState() {
+  //   return {
+  //     loggedIn: (firebase.auth().currentUser !== null),
+  //   };
+  // }
 
   componentWillMount() {
     firebase.auth().onAuthStateChanged((firebaseUser) => {
@@ -25,7 +32,7 @@ const Main = React.createClass({
         // console.log('Not logged in');
       }
     });
-  },
+  }
 
   render() {
     let loginOrOut;
@@ -66,7 +73,11 @@ const Main = React.createClass({
         </div>
       </span>
     );
-  },
-});
+  }
+}
+
+Main.propTypes = {
+  children: React.PropTypes.node.isRequired,
+};
 
 module.exports = Main;

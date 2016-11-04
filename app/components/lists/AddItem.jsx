@@ -23,4 +23,8 @@ class AddItem extends React.Component {
   }
 }
 
+AddItem.propTypes = {
+  add: React.PropTypes.func.isRequired,
+};
+
 module.exports = AddItem;

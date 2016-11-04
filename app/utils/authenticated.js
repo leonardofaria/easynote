@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-// import * as firebase from 'firebase';
 import _ from 'lodash';
 import * as config from '../../firebase.config';
-// firebase.initializeApp(config);
+
 const Rebase = require('re-base');
+
 const firebase = Rebase.createClass(config);
 
 function requireAuth(nextState, replace) {
-  const browserStorage = (typeof localStorage === 'undefined') ?
-    null : localStorage;
+  const browserStorage = (typeof window.localStorage === 'undefined') ?
+    null : window.localStorage;
   if (browserStorage) {
     if (!firebase.auth().currentUser) {
       let hasBrowserStorageUser = false;
