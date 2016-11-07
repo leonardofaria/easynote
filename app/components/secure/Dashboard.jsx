@@ -5,6 +5,7 @@ const ReactDOM = require('react-dom');
 const Rebase = require('re-base');
 const List = require('../lists/List');
 const AddItem = require('../lists/AddItem');
+const Notes = require('../notes/Notes');
 
 const base = Rebase.createClass(config);
 
@@ -47,14 +48,15 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-6 col-md-offset-3">
-            <div className="col-sm-12">
-              <h3 className="text-center">My Tasks</h3>
-              <AddItem add={this.handleAddItem.bind(this)} />
-              {this.state.loading === true ? <h4 className="text-center"> LOADING... </h4> : <List list={this.state.list} remove={this.handleRemoveItem.bind(this)} />}
-            </div>
+      <div>
+        <div className="notes-container">
+          <Notes x={this.state.notes} />
+        </div>
+        <div className="tasks-container">
+          <div>
+            <h3>My Tasks</h3>
+            <AddItem add={this.handleAddItem.bind(this)} />
+            {this.state.loading === true ? <h4 className="text-center"> LOADING... </h4> : <List list={this.state.list} remove={this.handleRemoveItem.bind(this)} />}
           </div>
         </div>
       </div>

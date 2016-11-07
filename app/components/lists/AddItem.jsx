@@ -10,11 +10,9 @@ class AddItem extends React.Component {
   }
   render() {
     return (
-      <div className="col-sm-12 text-center">
-        <input
-          type="text"
+      <div className="form form-tasks">
+        <input type="text"
           ref="newItem"
-          className="form-control"
           placeholder="New Item"
           onKeyDown={this.handleSubmit.bind(this)}
         />

@@ -1,15 +1,21 @@
 import React from 'react';
 
-// why this is not a ES6 class: https://goo.gl/1WHVmj
-function Task() {
-  const { details, index } = this.props;
+class Task extends React.Component {
+  render() {
+    const { details, index } = this.props;
 
-  return (
-    <li>
-      <span>{ details.item }</span>
-      <button onClick={this.props.remove.bind(null, index)}>Delete</button>
-    </li>
-  );
+    return (
+      <li>
+        <span>{ details.item }</span>
+        <button onClick={this.props.remove.bind(null, index)}>Delete</button>
+      </li>
+    );
+  }
 }
+
+Task.propTypes = {
+  details: React.PropTypes.object.isRequired,
+  index: React.PropTypes.string.isRequired,
+};
 
 export default Task;

@@ -1,3 +1,159 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import "util";
+
+$menu-width: 100px;
+$menu-width-open: 300px;
+$font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #fafafa;
+  color: #555;
+  font-family: $font;
+  margin: 0;
+}
+
+.form {
+  input, textarea {
+    background: transparent;
+    border: 0;
+    display: block;
+    margin: 0 0 10px 0;
+    padding: 0;
+    width: 100%;
+    transition: all 0.25s;
+
+    &:focus {
+      outline: 0;
+      border-color: #000;
+    }
+  }
+
+  textarea {
+    min-height: 300px;
+  }
+}
+
+.big {
+  font-size: 2.5rem;
+}
+
+aside {
+  background: #FFEB3B;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: $menu-width;
+  transition: all 0.25s;
+
+  &:hover {
+    width: $menu-width-open;
+  }
+
+  .logo {
+    color: #000;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-decoration: none;
+    padding: 15px 25px;
+    text-align: center;
+    width: $menu-width-open;
+
+    div.icon {
+      flex-basis: 50px;
+      font-size: 2rem;
+      margin-right: 25px;
+      text-align: center;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+
+      a {
+        color: #666;
+        display: flex;
+        align-items: center;
+        padding: 15px 25px;
+        font-size: 1rem;
+        transition: all 0.25s;
+        text-decoration: none;
+        width: $menu-width-open;
+
+        div.icon {
+          flex-basis: 50px;
+          font-size: 1.5rem;
+          margin-right: 25px;
+          text-align: center;
+        }
+
+        &:visited {
+          color: #666;
+        }
+
+        &:hover {
+          background: #555;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+main {
+  margin: 0 0 0 calc(#{$menu-width} + 20px);
+  padding: 0;
+
+  .notes-container, .tasks-container, .container {
+    float: left;
+    margin: 0;
+    padding: 80px 0 0 0;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: normal;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+  }
+
+  .container {
+    padding-right: 20px;
+    width: 100%;
+  }
+
+  .notes-container {
+    width: 66.66%;
+
+    > div {
+      margin: 0 20px 0 0;
+    }
+  }
+
+  .tasks-container {
+    border-left: 1px solid #ccc;
+    height: 100vh;
+    overflow-y: scroll;
+    width: calc(33.33% - 1px);
+
+    h3 {
+      margin-left: 20px;
+    }
+  }
 }

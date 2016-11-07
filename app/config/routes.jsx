@@ -6,6 +6,8 @@ const Login = require('../components/login-register/Login');
 const Logout = require('../components/login-register/Logout');
 const Dashboard = require('../components/secure/Dashboard');
 const Home = require('../components/Home');
+const AddNote = require('../components/notes/AddNote');
+const FullNote = require('../components/notes/FullNote');
 const requireAuth = require('../utils/authenticated');
 
 const Router = ReactRouter.Router;
@@ -21,6 +23,8 @@ const routes = (
       <Route path="logout" component={Logout} />
       <Route path="register" component={Register} />
       <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
+      <Route path="note/:noteId" component={FullNote} />
+      <Route path="notes/new" component={AddNote} onEnter={requireAuth} />
     </Route>
   </Router>
 );

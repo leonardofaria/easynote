@@ -14,12 +14,6 @@ class Main extends React.Component {
     };
   }
 
-  // getInitialState() {
-  //   return {
-  //     loggedIn: (firebase.auth().currentUser !== null),
-  //   };
-  // }
-
   componentWillMount() {
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       this.setState({
@@ -35,43 +29,47 @@ class Main extends React.Component {
   }
 
   render() {
+    let home;
+    let newNote;
+    let dashboard;
     let loginOrOut;
     let register;
-    let home;
 
     if (this.state.loggedIn) {
-      loginOrOut = <li><Link to="/logout">Logout</Link></li>;
+      home = <Link to="/dashboard" className="logo"><div className="icon"><span className="fa fa-sticky-note"></span></div><span>NoteAPP</span></Link>;
+      newNote = <li><Link to="/notes/new"><div className="icon"><span className="fa fa-file-text-o"></span></div><span>New note</span></Link></li>;
+      dashboard = <li><Link to="/dashboard"><div className="icon"><span className="fa fa-folder-open-o"></span></div><span>Recent</span></Link></li>;
+      loginOrOut = <li><Link to="/logout"><div className="icon"><span className="fa fa-sign-out"></span></div><span>Logout</span></Link></li>;
+
       register = null;
-      home = <Link to="/dashboard" className="navbar-brand">NoteAPP</Link>;
     } else {
-      loginOrOut = <li><Link to="/login">Login</Link></li>;
-      register = <li><Link to="/register">Register</Link></li>;
-      home = <Link to="/" className="navbar-brand">NoteAPP</Link>;
+      home = <Link to="/" className="logo">NoteAPP</Link>;
+      newNote = null;
+      dashboard = null;
+      loginOrOut = <li><Link to="/login"><div className="icon"><span className="fa fa-user"></span></div><span>Login</span></Link></li>;
+      register = <li><Link to="/register"><div className="icon"><span className="fa fa-user-plus"></span></div><span>Register</span></Link></li>;
+
     }
     return (
-      <span>
-        <nav className="navbar navbar-inverse navbar-static-top">
-          <div className="navbar-inner">
-            <div className="container">
-              <div className="navbar-header">
-                {home}
-              </div>
+      <div>
+        <aside>
+          <nav>
+            {home}
 
-              <div className="collapse navbar-collapse">
-                <ul className="nav navbar-nav navbar-right">
-                  {register}
-                  {loginOrOut}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <div className="container">
-          <div className="row">
-            {this.props.children}
-          </div>
-        </div>
-      </span>
+            <ul>
+              {newNote}
+              {dashboard}
+              {register}
+              {loginOrOut}
+            </ul>
+          </nav>
+        </aside>
+
+        <main>
+          {this.props.children}
+        </main>
+
+      </div>
     );
   }
 }
