@@ -1,4 +1,5 @@
 const Dotenv = require('dotenv-webpack');
+const path = require('path');
 
 module.exports = {
   entry: [
@@ -41,9 +42,17 @@ module.exports = {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass'],
       },
+      {
+        test: /\.json$/,
+        loader: 'json'
+      }
     ],
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
+    alias: {
+      medium_editor: path.join(__dirname, '/node_modules/medium-editor/dist/css/medium-editor.css'),
+      medium_editor_theme: path.join(__dirname, '/node_modules/medium-editor/dist/css/themes/default.css'),
+    }
   },
 };

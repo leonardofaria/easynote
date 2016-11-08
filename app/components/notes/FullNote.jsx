@@ -1,4 +1,5 @@
 import * as config from '../../../firebase.config';
+import ReactHtmlParser from 'react-html-parser';
 
 const React = require('react');
 const Rebase = require('re-base');
@@ -38,7 +39,7 @@ class FullNote extends React.Component {
         :
           <div>
             <h2><Link to={'/note/' + this.props.params.noteId} >{this.state.note.title}</Link></h2>
-            <div>{this.state.note.content}</div>
+            <div>{ ReactHtmlParser(this.state.note.content) }</div>
           </div>
         }
 
