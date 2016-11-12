@@ -30,26 +30,22 @@ class Main extends React.Component {
 
   render() {
     let home;
-    let newNote;
-    let dashboard;
+    let newNote = null;
+    let dashboard = null;
     let loginOrOut;
-    let register;
+    let register = null;
 
     if (this.state.loggedIn) {
-      home = <Link to="/dashboard" className="logo"><div className="icon"><span className="fa fa-sticky-note"></span></div><span>NoteAPP</span></Link>;
-      newNote = <li><Link to="/notes/new"><div className="icon"><span className="fa fa-file-text-o"></span></div><span>New note</span></Link></li>;
-      dashboard = <li><Link to="/dashboard"><div className="icon"><span className="fa fa-folder-open-o"></span></div><span>Recent</span></Link></li>;
-      loginOrOut = <li><Link to="/logout"><div className="icon"><span className="fa fa-sign-out"></span></div><span>Logout</span></Link></li>;
-
-      register = null;
+      home = <Link to="/dashboard" className="logo"><div className="icon"><span className="fa fa-sticky-note" /></div><span>NoteAPP</span></Link>;
+      newNote = <li><Link to="/notes/new"><div className="icon"><span className="fa fa-file-text-o" /></div><span>New note</span></Link></li>;
+      dashboard = <li><Link to="/dashboard"><div className="icon"><span className="fa fa-folder-open-o" /></div><span>Recent</span></Link></li>;
+      loginOrOut = <li><Link to="/logout"><div className="icon"><span className="fa fa-sign-out" /></div><span>Logout</span></Link></li>;
     } else {
       home = <Link to="/" className="logo">NoteAPP</Link>;
-      newNote = null;
-      dashboard = null;
-      loginOrOut = <li><Link to="/login"><div className="icon"><span className="fa fa-user"></span></div><span>Login</span></Link></li>;
-      register = <li><Link to="/register"><div className="icon"><span className="fa fa-user-plus"></span></div><span>Register</span></Link></li>;
-
+      loginOrOut = <li><Link to="/login"><div className="icon"><span className="fa fa-user" /></div><span>Login</span></Link></li>;
+      register = <li><Link to="/register"><div className="icon"><span className="fa fa-user-plus" /></div><span>Register</span></Link></li>;
     }
+
     return (
       <div>
         <aside>

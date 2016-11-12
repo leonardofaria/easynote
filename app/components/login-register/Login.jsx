@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 
+const ReactRouter = require('react-router');
+
+const Link = ReactRouter.Link;
+
 const Login = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired,
@@ -10,6 +14,14 @@ const Login = React.createClass({
     return {
       error: false,
     };
+  },
+
+  componentWillMount() {
+    document.body.classList.add('page-login');
+  },
+
+  componentWillUnmount() {
+    document.body.classList.remove('page-login');
   },
 
   handleSubmit(e) {
@@ -28,7 +40,7 @@ const Login = React.createClass({
       // User signed in!
       // console.log('User signed in!');
       // var uid = result.user.uid;
-    }).catch(function(error) {
+    }).catch(error => {
       this.setState({ error: error });
     });
   },
@@ -55,21 +67,18 @@ const Login = React.createClass({
   render() {
     const errors = this.state.error ? <p> {this.state.error} </p> : '';
     return (
-      <div className="col-sm-6 col-sm-offset-3">
-        <h1> Login </h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label> Email </label>
-            <input className="form-control" ref="email" placeholder="Email" />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input ref="pw" type="password" className="form-control" placeholder="Password" />
-          </div>
+      <div className="text-center">
+        <h1>Logo</h1>
+        <form className="form form-account" onSubmit={this.handleSubmit}>
+          <input className="form-control" ref="email" placeholder="Email" />
+          <input ref="pw" type="password" className="form-control" placeholder="Password" />
           {errors}
           <button type="submit" className="btn btn-primary">Login</button><br />
+
+          <button type="button" className="btn btn-facebook" onClick={() => this.handleExternalLogin('facebook')}>Login Facebook</button>
         </form>
-        <button type="button" className="btn btn-primary" onClick={() => this.handleExternalLogin('facebook')}>Login Facebook</button>
+
+        <Link to="/register">Register</Link>
       </div>
     );
   },

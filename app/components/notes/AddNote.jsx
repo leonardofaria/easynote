@@ -1,5 +1,5 @@
-import * as config from '../../../firebase.config';
 import Editor from 'react-medium-editor';
+import * as config from '../../../firebase.config';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -20,12 +20,11 @@ class AddNote extends React.Component {
   componentDidMount() {
     this.ref = base.syncState('notes', {
       context: this,
-      state: 'notes'
+      state: 'notes',
     });
   }
 
   handleSubmit() {
-
     const title = ReactDOM.findDOMNode(this.refs.title).value;
     // const content = ReactDOM.findDOMNode(this.refs.content).value;
     const content = this.state.text;
@@ -45,19 +44,19 @@ class AddNote extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container flex-container">
         <h3>My notes</h3>
 
         <div className="form form-notes">
           <input type="text" ref="title" placeholder="Title your note" className="big" />
-          <textarea ref="content" className="hide" placeholder="Start your text here..."></textarea>
-
           <Editor
-            tag="pre"
+            tag="div"
             text={this.state.text}
             onChange={this.handleChange.bind(this)}
           />
-          <button onClick={this.handleSubmit.bind(this)}>Save</button>
+          <div className="actions">
+            <button className="btn" onClick={this.handleSubmit.bind(this)}>Save</button>
+          </div>
         </div>
       </div>
     );

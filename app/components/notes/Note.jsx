@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactRouter = require('react-router');
+
 const Link = ReactRouter.Link;
 
 class Note extends React.Component {
@@ -8,11 +9,10 @@ class Note extends React.Component {
 
     return (
       <div>
-        <Link to={'/note/'+ index } >{ details.title }</Link>
+        <Link to={'/note/'+ index} >{ details.title }</Link>
         <button onClick={this.props.remove.bind(null, index)}>Delete</button>
       </div>
     );
-
   }
 }
 
