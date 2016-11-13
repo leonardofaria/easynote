@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 
+const ReactRouter = require('react-router');
+
 class Logout extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,7 @@ class Logout extends React.Component {
   componentDidMount() {
     firebase.auth().signOut();
     this.setState({ loggedIn: false });
-    // this.context.router.replace('/');
+    this.context.router.replace('/');
   }
 
   render() {
