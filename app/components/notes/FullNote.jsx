@@ -1,11 +1,11 @@
 import ReactHtmlParser from 'react-html-parser';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as config from '../../../firebase.config';
 
 const React = require('react');
 const Rebase = require('re-base');
 const ReactRouter = require('react-router');
-const EditNote = require('../notes/EditNote');
+const EditNote = require('./EditNote');
+const Modal = require('../Modal');
 
 const base = Rebase.createClass(config);
 const Link = ReactRouter.Link;
@@ -13,11 +13,11 @@ const Link = ReactRouter.Link;
 class FullNote extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleEdit = this.toggleEdit.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.state = {
       note: {},
       loading: true,
-      editActive: false,
+      isModalOpen: false,
     };
   }
 
@@ -35,20 +35,11 @@ class FullNote extends React.Component {
     base.removeBinding(this.ref);
   }
 
-  toggleEdit() {
-    const editState = !this.state.editActive;
-    this.setState({ editActive: !this.state.editActive });
+  toggleModal() {
+    this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
   render() {
-    let edit;
-
-    if (this.state.editActive) {
-      edit = <EditNote noteId={this.props.params.noteId} />;
-    } else {
-      edit = ReactHtmlParser(this.state.note.content);
-    }
-
     return (
       <div className="container">
         {this.state.loading === true ?
@@ -56,11 +47,22 @@ class FullNote extends React.Component {
         :
           <div>
             <h3><Link to={`/note/${this.props.params.noteId}`} >{this.state.note.title}</Link></h3>
-            <button className="pull-right" onClick={this.toggleEdit}>edit</button>
+            <button onClick={this.toggleModal}>Edit</button>
 
-            <ReactCSSTransitionGroup transitionName="edit" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-              {edit}
-            </ReactCSSTransitionGroup>
+            {ReactHtmlParser(this.state.note.content)}
+
+            <Modal
+              isOpen={this.state.isModalOpen}
+              transitionName="modal-anim"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}
+            >
+              <h3>Edit</h3>
+              <button onClick={this.toggleModal}>Close</button>
+              <div className="body">
+                <EditNote noteId={this.props.params.noteId} />
+              </div>
+            </Modal>
           </div>
         }
 
@@ -71,7 +73,6 @@ class FullNote extends React.Component {
 
 FullNote.propTypes = {
   params: React.PropTypes.object.isRequired,
-  noteId: React.PropTypes.string.isRequired,
 };
 
 module.exports = FullNote;

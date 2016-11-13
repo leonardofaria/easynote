@@ -22,6 +22,57 @@ body {
   margin: 0;
 }
 
+.modal {
+  left: 0;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 10;
+
+  .background {
+    background: rgba(0, 0, 0, 0.65);
+    left: 0;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .content {
+    background: #fff;
+    padding: 15px;
+    width: calc(100% - (#{$menu-width} * 2));
+  }
+}
+
+.modal-anim-enter {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.2s;
+
+  &.modal-anim-enter-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-anim-leave {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.2s;
+
+  &.modal-anim-leave-active {
+    opacity: 0.00;
+    transform: scale(0.7);
+  }
+}
+
 .form {
   input, textarea, .medium-editor-element {
     background: transparent;
@@ -281,28 +332,6 @@ main {
     }
   }
 }
-
-.edit-enter {
-  max-height: 0px;
-  -webkit-transition: max-height 1s ease;
-  overflow: hidden;
-}
-
-.edit-enter.edit-enter-active {
-  height: auto;
-  max-height: 100px;
-}
-
-.edit-leave {
-  max-height: 100px;
-  -webkit-transition: max-height 1s ease;
-}
-
-.edit-leave.edit-leave-active {
-  overflow: hidden;
-  max-height: 0px;
-}
-
 
 body.page-login, body.page-register {
   background: url('../images/bg.jpg') center center no-repeat;
