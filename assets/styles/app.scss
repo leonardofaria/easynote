@@ -1,13 +1,9 @@
 @import "~normalize";
+@import "variables";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 @import "util";
+@import "ui";
 @import "~medium_editor", "~medium_editor_theme";
-
-$menu-width: 100px;
-$menu-width-open: 300px;
-$font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-$gray: #5a5a5a;
-$yellow: #f9ef48;
 
 * {
   box-sizing: border-box;
@@ -22,54 +18,12 @@ body {
   margin: 0;
 }
 
-.modal {
-  left: 0;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  z-index: 10;
+input, textarea, select, button {
+  border-radius: 0;
+  -webkit-appearance: none;
 
-  .background {
-    background: rgba(0, 0, 0, 0.65);
-    left: 0;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-  }
-
-  .content {
-    background: #fff;
-    padding: 15px;
-    width: calc(100% - (#{$menu-width} * 2));
-  }
-}
-
-.modal-anim-enter {
-  opacity: 0;
-  transform: scale(0.7);
-  transition: all 0.2s;
-
-  &.modal-anim-enter-active {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.modal-anim-leave {
-  opacity: 1;
-  transform: scale(1);
-  transition: all 0.2s;
-
-  &.modal-anim-leave-active {
-    opacity: 0.00;
-    transform: scale(0.7);
+  &:focus {
+    outline: 0;
   }
 }
 
@@ -96,7 +50,6 @@ body {
   }
 
   .btn {
-    -webkit-appearance: none;
     background: #ccc;
     border: 0;
     font-size: 0.8rem;
@@ -181,6 +134,7 @@ aside {
   top: 0;
   width: $menu-width;
   transition: all 0.25s;
+  z-index: 10;
 
   .logo {
     color: #fff;
@@ -265,11 +219,48 @@ main {
     margin: 0;
     padding: 80px 0 0 0;
 
-    h3 {
-      font-size: 1.25rem;
-      font-weight: normal;
-      margin-bottom: 40px;
-      text-transform: uppercase;
+    .toolbar {
+      display: flex;
+      margin: 0 0 20px 0;
+      justify-content: space-between;
+      align-items: center;
+
+      &.primary-toolbar {
+        margin-top: 40px;
+      }
+
+      &.secondary-toolbar {
+        margin-top: 20px;
+        flex-direction: row-reverse;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: normal;
+        margin: 0 10px 0 0;
+        text-transform: uppercase;
+      }
+
+      .btn {
+        @include bg-effect($gray, 50%);
+
+        background: transparent;
+        border: 1px solid $gray;
+        color: gray;
+        font-size: 0.8rem;
+        padding: 5px 10px;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: all 0.25s;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    .modal .secondary-toolbar {
+      margin-bottom: 0;
     }
   }
 
@@ -291,15 +282,13 @@ main {
       margin: 0 20px 0 0;
 
       .note {
+        @include bg-effect($yellow);
         align-items: center;
         display: flex;
         margin: 0 -20px;
-        padding: 10px 15px;
+        padding: 10px 20px;
+        position: relative;
         transition: all 0.25s;
-
-        &:hover {
-          background: $yellow;
-        }
 
         .link {
           color: $gray;
@@ -315,7 +304,6 @@ main {
         }
 
         .delete {
-          -webkit-appearance: none;
           background: transparent;
           border-radius: 0;
           border: 0;

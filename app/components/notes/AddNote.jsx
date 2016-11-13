@@ -47,12 +47,13 @@ class AddNote extends React.Component {
   render() {
     return (
       <div className="container flex-container">
-        <h3>My notes</h3>
-
+        <div className="toolbar main-toolbar">
+          <h3>New notes</h3>
+        </div>
         <div className="form form-notes">
           <input type="text" ref={(c) => { this.title = c; }} placeholder="Title your note" className="big" />
           <Editor tag="div" text={this.state.text} onChange={this.handleChange} />
-          <div className="actions">
+          <div className="toolbar secondary-toolbar">
             <button className="btn" onClick={this.handleSubmit}>Save</button>
           </div>
         </div>

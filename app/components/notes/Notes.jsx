@@ -5,12 +5,16 @@ const ReactDOM = require('react-dom');
 const Rebase = require('re-base');
 const Note = require('./Note');
 const AddNote = require('../notes/AddNote');
+const Loading = require('../Loading');
+const ReactRouter = require('react-router');
 
 const base = Rebase.createClass(config);
+const Link = ReactRouter.Link;
 
 class Notes extends React.Component {
   constructor(props) {
     super(props);
+    this.handleRemoveNote = this.handleRemoveNote.bind(this);
     this.state = {
       notes: [],
       loading: true,
@@ -31,30 +35,30 @@ class Notes extends React.Component {
     base.removeBinding(this.ref);
   }
 
-  handleAddNote(title, content) {
-    const notes = this.state.notes;
-    const timestamp = Date.now();
-    const currentUser = base.auth().currentUser;
-    notes[`note-${timestamp}`] = { title: title, content: content, user: currentUser.uid };
-    this.setState({ notes: notes });
-  }
-
   handleRemoveNote(index) {
     const notes = this.state.notes;
     notes[index] = null;
-    this.setState({ notes: notes });
+    this.setState({ notes });
   }
 
   render() {
     return (
       <div>
-        <h3>My Notes</h3>
+        <div className="toolbar main-toolbar">
+          <h3>My Notes</h3>
+          <Link to="/notes/new" className="btn">New note</Link>
+        </div>
         {this.state.loading === true ?
-          <h4 className="text-center">Loading my notes...</h4>
+          <Loading />
         :
-          Object
-            .keys(this.state.notes)
-            .map(key => <Note key={key} index={key} details={this.state.notes[key]} remove={this.handleRemoveNote.bind(this)} />)
+          Object.keys(this.state.notes)
+            .map(key =>
+              <Note
+                key={key}
+                index={key}
+                details={this.state.notes[key]}
+                remove={this.handleRemoveNote}
+              />)
         }
       </div>
     );

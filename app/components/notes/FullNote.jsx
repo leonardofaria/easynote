@@ -1,4 +1,4 @@
-import ReactHtmlParser from 'react-html-parser';
+import reactHtmlParser from 'react-html-parser';
 import * as config from '../../../firebase.config';
 
 const React = require('react');
@@ -6,6 +6,7 @@ const Rebase = require('re-base');
 const ReactRouter = require('react-router');
 const EditNote = require('./EditNote');
 const Modal = require('../Modal');
+const Loading = require('../Loading');
 
 const base = Rebase.createClass(config);
 const Link = ReactRouter.Link;
@@ -43,27 +44,32 @@ class FullNote extends React.Component {
     return (
       <div className="container">
         {this.state.loading === true ?
-          <h4 className="text-center"> LOADING... </h4>
+          <Loading />
         :
-          <div>
+        <div>
+          <div className="toolbar main-toolbar">
             <h3><Link to={`/note/${this.props.params.noteId}`} >{this.state.note.title}</Link></h3>
-            <button onClick={this.toggleModal}>Edit</button>
-
-            {ReactHtmlParser(this.state.note.content)}
-
-            <Modal
-              isOpen={this.state.isModalOpen}
-              transitionName="modal-anim"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}
-            >
-              <h3>Edit</h3>
-              <button onClick={this.toggleModal}>Close</button>
-              <div className="body">
-                <EditNote noteId={this.props.params.noteId} />
-              </div>
-            </Modal>
+            <button onClick={this.toggleModal} className="btn">Edit</button>
           </div>
+
+          {reactHtmlParser(this.state.note.content)}
+
+          <Modal
+            isOpen={this.state.isModalOpen}
+            transitionName="modal-anim"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+          >
+            <div className="toolbar">
+              <h3>Edit</h3>
+              <button onClick={this.toggleModal} className="btn">Close</button>
+            </div>
+
+            <div className="body">
+              <EditNote noteId={this.props.params.noteId} />
+            </div>
+          </Modal>
+        </div>
         }
 
       </div>

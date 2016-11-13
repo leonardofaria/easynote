@@ -4,6 +4,7 @@ import * as config from '../../../firebase.config';
 const React = require('react');
 const ReactRouter = require('react-router');
 const Rebase = require('re-base');
+const Loading = require('../Loading');
 
 const base = Rebase.createClass(config);
 const Link = ReactRouter.Link;
@@ -53,15 +54,16 @@ class EditNote extends React.Component {
     return (
       <div>
         {this.state.loading === true ?
-          <h4 className="text-center"> LOADING... </h4>
+          <Loading />
         :
-          <div className="form form-notes">
-            <input type="text" ref={(c) => { this.title = c; }} placeholder="Title your note" className="big" defaultValue={this.state.note.title} />
-            <Editor tag="div" text={this.state.note.content} onChange={this.handleChange} />
-            <div className="actions">
-              <button className="btn" onClick={this.handleSubmit}>Update</button>
-            </div>
+        <div className="form form-notes">
+          <input type="text" ref={(c) => { this.title = c; }} placeholder="Title your note" className="big" defaultValue={this.state.note.title} />
+          <Editor tag="div" text={this.state.note.content} onChange={this.handleChange} />
+
+          <div className="toolbar secondary-toolbar">
+            <button className="btn" onClick={this.handleSubmit}>Update</button>
           </div>
+        </div>
         }
 
       </div>

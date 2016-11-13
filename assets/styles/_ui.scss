@@ -1,0 +1,102 @@
+$bg: #fff;
+$fill: $gray;
+
+.hourglass{
+  display: block;
+  background: $bg;
+  margin: 0 auto;
+  width: 30px;
+  height: 60px;
+  box-shadow:
+    inset $bg 0 0 0 0,
+    inset $fill 0 2em 0 0,
+    inset $bg 0 0 4em 0;
+  animation: hourglass 1s linear infinite;
+}
+
+.outer{
+  fill: $fill;
+}
+
+.middle{
+  fill: $bg;
+}
+
+@keyframes hourglass {
+  0% {
+    transform: rotate(0deg);
+    box-shadow:
+      inset $bg 0 0 0 0,
+      inset $fill 0 2em 0 0,
+      inset $bg 0 4em 0 0,
+      inset $fill 0 4em 0 0;
+  }
+  80% {
+    transform: rotate(0deg);
+    box-shadow:
+      inset $bg 0 2em 0 0,
+      inset $fill 0 2em 0 0,
+      inset $bg 0 2em 0 0,
+      inset $fill 0 4em 0 0;
+  }
+  100% {
+    transform: rotate(180deg);
+    box-shadow:
+      inset $bg 0 2em 0 0,
+      inset $fill 0 2em 0 0,
+      inset $bg 0 2em 0 0,
+      inset $fill 0 4em 0 0;
+  }
+}
+
+
+.modal {
+  left: 0;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 10;
+
+  .background {
+    background: rgba(0, 0, 0, 0.65);
+    left: 0;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .content {
+    background: #fff;
+    padding: 15px;
+    width: calc(100% - (#{$menu-width} * 2));
+  }
+}
+
+.modal-anim-enter {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.2s;
+
+  &.modal-anim-enter-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-anim-leave {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.2s;
+
+  &.modal-anim-leave-active {
+    opacity: 0.00;
+    transform: scale(0.7);
+  }
+}

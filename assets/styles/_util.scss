@@ -5,3 +5,26 @@
 .hide {
   display: none !important;
 }
+
+@mixin bg-effect($color, $initialWidth: 70%) {
+  position: relative;
+
+  &:after {
+    content: " ";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: $initialWidth;
+    transition: all 0.25s;
+    z-index: -1;
+  }
+
+  &:hover {
+    &:after {
+      background: $color;
+      width: 100%;
+    }
+  }
+}
