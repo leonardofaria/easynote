@@ -2,7 +2,7 @@ import Editor from 'react-medium-editor';
 import * as config from '../../../firebase.config';
 
 const React = require('react');
-const ReactDOM = require('react-dom');
+const ReactRouter = require('react-router');
 const Rebase = require('re-base');
 
 const base = Rebase.createClass(config);
@@ -10,6 +10,8 @@ const base = Rebase.createClass(config);
 class AddNote extends React.Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       notes: [],
       loading: true,
@@ -25,21 +27,21 @@ class AddNote extends React.Component {
   }
 
   handleSubmit() {
-    const title = ReactDOM.findDOMNode(this.refs.title).value;
-    // const content = ReactDOM.findDOMNode(this.refs.content).value;
+    const title = this.title.value;
     const content = this.state.text;
-    // this.props.add(title, content);
-    // ReactDOM.findDOMNode(this.refs.newItem).value = '';
-
     const notes = this.state.notes;
     const timestamp = Date.now();
-    const currentUser = base.auth().currentUser;
-    notes[`note-${timestamp}`] = { title: title, content: content, user: currentUser.uid };
-    this.setState({ notes: notes });
+    const user = base.auth().currentUser.uid;
+
+    const note = { title, content, user, timestamp };
+    notes[`note-${timestamp}`] = note;
+    this.setState({ notes });
+
+    this.context.router.replace(`/note/note-${timestamp}`);
   }
 
   handleChange(text, medium) {
-    this.setState({ text: text });
+    this.setState({ text });
   }
 
   render() {
@@ -48,14 +50,10 @@ class AddNote extends React.Component {
         <h3>My notes</h3>
 
         <div className="form form-notes">
-          <input type="text" ref="title" placeholder="Title your note" className="big" />
-          <Editor
-            tag="div"
-            text={this.state.text}
-            onChange={this.handleChange.bind(this)}
-          />
+          <input type="text" ref={(c) => { this.title = c; }} placeholder="Title your note" className="big" />
+          <Editor tag="div" text={this.state.text} onChange={this.handleChange} />
           <div className="actions">
-            <button className="btn" onClick={this.handleSubmit.bind(this)}>Save</button>
+            <button className="btn" onClick={this.handleSubmit}>Save</button>
           </div>
         </div>
       </div>
@@ -63,8 +61,8 @@ class AddNote extends React.Component {
   }
 }
 
-AddNote.propTypes = {
-  // add: React.PropTypes.func.isRequired,
+AddNote.contextTypes = {
+  router: React.PropTypes.object.isRequired,
 };
 
 module.exports = AddNote;
