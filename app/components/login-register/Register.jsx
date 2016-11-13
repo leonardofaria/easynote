@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 
+const ReactRouter = require('react-router');
+
+const Link = ReactRouter.Link;
+
 const Register = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired,
@@ -40,6 +44,7 @@ const Register = React.createClass({
           <input ref="pw" type="password" className="form-control" placeholder="Password" />
           {errors}
           <button type="submit" className="btn btn-primary">Register</button>
+          <Link to="/login">Login</Link>
         </form>
       </div>
     );

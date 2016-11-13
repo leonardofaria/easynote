@@ -76,9 +76,9 @@ const Login = React.createClass({
           <button type="submit" className="btn btn-primary">Login</button><br />
 
           <button type="button" className="btn btn-facebook" onClick={() => this.handleExternalLogin('facebook')}>Login Facebook</button>
-        </form>
 
-        <Link to="/register">Register</Link>
+          <Link to="/register">Register</Link>
+        </form>
       </div>
     );
   },
