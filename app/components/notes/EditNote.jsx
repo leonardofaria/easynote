@@ -74,4 +74,8 @@ class EditNote extends React.Component {
   }
 }
 
+EditNote.propTypes = {
+  noteId: React.PropTypes.string.isRequired,
+};
+
 module.exports = EditNote;

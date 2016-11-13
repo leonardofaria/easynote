@@ -18,7 +18,7 @@ const IndexRoute = ReactRouter.IndexRoute;
 const routes = (
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={Login} />
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
       <Route path="register" component={Register} />
@@ -30,3 +30,4 @@ const routes = (
 );
 
 module.exports = routes;
+

@@ -69,4 +69,9 @@ class FullNote extends React.Component {
   }
 }
 
+FullNote.propTypes = {
+  params: React.PropTypes.object.isRequired,
+  noteId: React.PropTypes.string.isRequired,
+};
+
 module.exports = FullNote;
