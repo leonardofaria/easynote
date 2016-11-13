@@ -5,8 +5,8 @@
     "no-unused-vars": 0,
     // "prop-types": [2],
   },
-  "globals": {
-    "document": true,
-    "window": true,
-  },
+  "env": {
+    "browser": true,
+    "node": true,
+  }
 }

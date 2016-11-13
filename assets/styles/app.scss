@@ -1,4 +1,4 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css");
+@import "~normalize";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 @import "util";
 @import "~medium_editor", "~medium_editor_theme";
@@ -6,6 +6,8 @@
 $menu-width: 100px;
 $menu-width-open: 300px;
 $font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$gray: #5a5a5a;
+$yellow: #f9ef48;
 
 * {
   box-sizing: border-box;
@@ -84,6 +86,7 @@ body {
     input {
       background: #fff;
       display: block;
+      font-size: 0.875rem;
       height: 45px;
       line-height: 45px;
       text-align: center;
@@ -95,11 +98,22 @@ body {
     }
 
     .btn {
+      font-size: 0.875rem;
       height: 45px;
       line-height: 45px;
       margin-bottom: 10px;
       padding: 0;
       width: 100%;
+    }
+
+    a, a:visited {
+      color: #3c3c3c;
+      font-size: 0.75rem;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -109,7 +123,7 @@ body {
 }
 
 aside {
-  background: #FFEB3B;
+  background-image: linear-gradient(90deg, #5a5a5a $menu-width, transparent 0px, transparent 100%);
   left: 0;
   height: 100%;
   overflow: hidden;
@@ -123,13 +137,13 @@ aside {
   }
 
   .logo {
-    color: #000;
+    color: #fff;
     display: flex;
     align-items: center;
     font-size: 1rem;
     margin-bottom: 20px;
     text-decoration: none;
-    padding: 15px 25px;
+    padding: 15px 25px 15px 35px;
     text-align: center;
     width: $menu-width-open;
 
@@ -150,11 +164,11 @@ aside {
       margin: 0;
       padding: 0;
 
-      a {
-        color: #666;
+      a, a:visited {
+        color: #fff;
         display: flex;
         align-items: center;
-        padding: 15px 25px;
+        padding: 15px 25px 15px 35px;
         font-size: 1rem;
         transition: all 0.25s;
         text-decoration: none;
@@ -167,13 +181,18 @@ aside {
           text-align: center;
         }
 
-        &:visited {
-          color: #666;
+        > span {
+          color: transparent;
+          transition: all 0.25s;
         }
 
         &:hover {
-          background: #555;
-          color: #fff;
+          background: $yellow;
+          color: $gray;
+
+          > span {
+            color: $gray;
+          }
         }
       }
     }
@@ -203,7 +222,6 @@ main {
   }
 
   .flex-container {
-    // background: yellow;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -214,6 +232,41 @@ main {
 
     > div {
       margin: 0 20px 0 0;
+
+      .note {
+        align-items: center;
+        display: flex;
+        margin: 0 -20px;
+        padding: 10px 15px;
+        transition: all 0.25s;
+
+        &:hover {
+          background: $yellow;
+        }
+
+        .link {
+          color: $gray;
+          flex-grow: 1;
+          font-size: 1.75rem;
+          text-decoration: none;
+        }
+
+        .date {
+          font-size: 1.125rem;
+          font-style: italic;
+          margin: 0 10px;
+        }
+
+        .delete {
+          -webkit-appearance: none;
+          background: transparent;
+          border-radius: 0;
+          border: 0;
+          font-size: 2rem;
+          margin: 0;
+          padding: 0;
+        }
+      }
     }
   }
 
@@ -252,7 +305,7 @@ main {
 
 
 body.page-login, body.page-register {
-  background: url('/img/bg.png') center center no-repeat;
+  background: url('../images/bg.jpg') center center no-repeat;
   background-size: cover;
 
   aside {
