@@ -174,18 +174,13 @@ body {
 }
 
 aside {
-  background-image: linear-gradient(90deg, #5a5a5a $menu-width, transparent 0px, transparent 100%);
+  background: $gray;
   left: 0;
   height: 100%;
-  overflow: hidden;
   position: fixed;
   top: 0;
   width: $menu-width;
   transition: all 0.25s;
-
-  &:hover {
-    width: $menu-width-open;
-  }
 
   .logo {
     color: #fff;
@@ -215,18 +210,25 @@ aside {
       margin: 0;
       padding: 0;
 
+      &.logout {
+        bottom: 0;
+        position: fixed;
+      }
+
       a, a:visited {
         color: #fff;
         display: flex;
         align-items: center;
         padding: 15px 25px 15px 35px;
         font-size: 1rem;
+        overflow: hidden;
         transition: all 0.25s;
         text-decoration: none;
-        width: $menu-width-open;
+        width: $menu-width;
 
         div.icon {
           flex-basis: 50px;
+          flex-shrink: 0;
           font-size: 1.5rem;
           margin-right: 25px;
           text-align: center;
@@ -235,11 +237,15 @@ aside {
         > span {
           color: transparent;
           transition: all 0.25s;
+          flex-grow: 1;
+          flex-shrink: 0;
         }
 
         &:hover {
           background: $yellow;
           color: $gray;
+          overflow: inherit;
+          width: $menu-width-open;
 
           > span {
             color: $gray;

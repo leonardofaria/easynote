@@ -39,7 +39,7 @@ class Main extends React.Component {
       home = <Link to="/dashboard" className="logo"><div className="icon"><span className="fa fa-sticky-note" /></div><span>NoteAPP</span></Link>;
       newNote = <li><Link to="/notes/new"><div className="icon"><span className="fa fa-file-text-o" /></div><span>New note</span></Link></li>;
       dashboard = <li><Link to="/dashboard"><div className="icon"><span className="fa fa-folder-open-o" /></div><span>Recent</span></Link></li>;
-      loginOrOut = <li><Link to="/logout"><div className="icon"><span className="fa fa-sign-out" /></div><span>Logout</span></Link></li>;
+      loginOrOut = <li className="logout"><Link to="/logout"><div className="icon"><span className="fa fa-sign-out" /></div><span>Logout</span></Link></li>;
     } else {
       home = <Link to="/" className="logo">NoteAPP</Link>;
       loginOrOut = <li><Link to="/login"><div className="icon"><span className="fa fa-user" /></div><span>Login</span></Link></li>;
