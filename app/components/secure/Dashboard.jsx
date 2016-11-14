@@ -3,8 +3,7 @@ import * as config from '../../../firebase.config';
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Rebase = require('re-base');
-const List = require('../lists/List');
-const AddItem = require('../lists/AddItem');
+const Lists = require('../lists/Lists');
 const Notes = require('../notes/Notes');
 const Loading = require('../Loading');
 
@@ -54,11 +53,7 @@ class Dashboard extends React.Component {
           <Notes />
         </div>
         <div className="tasks-container">
-          <div>
-            <h3>My Tasks</h3>
-            <AddItem add={this.handleAddItem.bind(this)} />
-            {this.state.loading === true ? <Loading /> : <List list={this.state.list} remove={this.handleRemoveItem.bind(this)} />}
-          </div>
+          <Lists />
         </div>
       </div>
     );

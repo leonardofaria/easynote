@@ -1,24 +1,26 @@
 $bg: #fff;
 $fill: $gray;
+$width: 20px;
+$height: $width * 2;
 
 .hourglass{
   display: block;
   background: $bg;
   margin: 0 auto;
-  width: 30px;
-  height: 60px;
+  width: $width;
+  height: $height;
   box-shadow:
     inset $bg 0 0 0 0,
-    inset $fill 0 2em 0 0,
-    inset $bg 0 0 4em 0;
+    inset $fill 0 $width 0 0,
+    inset $bg 0 0 $height 0;
   animation: hourglass 1s linear infinite;
 }
 
-.outer{
+.outer {
   fill: $fill;
 }
 
-.middle{
+.middle {
   fill: $bg;
 }
 
@@ -27,25 +29,25 @@ $fill: $gray;
     transform: rotate(0deg);
     box-shadow:
       inset $bg 0 0 0 0,
-      inset $fill 0 2em 0 0,
-      inset $bg 0 4em 0 0,
-      inset $fill 0 4em 0 0;
+      inset $fill 0 $width 0 0,
+      inset $bg 0 $height 0 0,
+      inset $fill 0 $height 0 0;
   }
   80% {
     transform: rotate(0deg);
     box-shadow:
-      inset $bg 0 2em 0 0,
-      inset $fill 0 2em 0 0,
-      inset $bg 0 2em 0 0,
-      inset $fill 0 4em 0 0;
+      inset $bg 0 $width 0 0,
+      inset $fill 0 $width 0 0,
+      inset $bg 0 $width 0 0,
+      inset $fill 0 $height 0 0;
   }
   100% {
     transform: rotate(180deg);
     box-shadow:
-      inset $bg 0 2em 0 0,
-      inset $fill 0 2em 0 0,
-      inset $bg 0 2em 0 0,
-      inset $fill 0 4em 0 0;
+      inset $bg 0 $width 0 0,
+      inset $fill 0 $width 0 0,
+      inset $bg 0 $width 0 0,
+      inset $fill 0 $height 0 0;
   }
 }
 

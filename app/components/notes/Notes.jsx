@@ -36,9 +36,11 @@ class Notes extends React.Component {
   }
 
   handleRemoveNote(index) {
-    const notes = this.state.notes;
-    notes[index] = null;
-    this.setState({ notes });
+    if (confirm('Are you sure?')) {
+      const notes = this.state.notes;
+      notes[index] = null;
+      this.setState({ notes });
+    }
   }
 
   render() {

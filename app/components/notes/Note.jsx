@@ -25,8 +25,11 @@ class Note extends React.Component {
     if (isOwner) {
       return (
         <div className="note">
-          <Link className="link" to={`/note/${index}`} >{ details.title }</Link>
-          <span className="date">{date}</span>
+          <Link className="link" to={`/note/${index}`} >
+            <span className="title">{details.title}</span>
+            <span className="date">{date}</span>
+          </Link>
+
           <button className="delete" onClick={this.remove(index)}>
             <span className="fa fa-trash-o" />
           </button>

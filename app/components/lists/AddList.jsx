@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-class AddItem extends React.Component {
+class AddList extends React.Component {
   handleSubmit(e) {
     if (e.keyCode === 13) {
       this.props.add(ReactDOM.findDOMNode(this.refs.newItem).value);
@@ -21,8 +21,8 @@ class AddItem extends React.Component {
   }
 }
 
-AddItem.propTypes = {
+AddList.propTypes = {
   add: React.PropTypes.func.isRequired,
 };
 
-module.exports = AddItem;
+module.exports = AddList;

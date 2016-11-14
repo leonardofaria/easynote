@@ -291,16 +291,26 @@ main {
         transition: all 0.25s;
 
         .link {
+          align-items: center;
           color: $gray;
+          display: flex;
           flex-grow: 1;
-          font-size: 1.75rem;
           text-decoration: none;
-        }
 
-        .date {
-          font-size: 1.125rem;
-          font-style: italic;
-          margin: 0 10px;
+          .title {
+            flex-grow: 1;
+            font-size: 1.75rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+
+          .date {
+            flex-shrink: 0;
+            font-size: 1.125rem;
+            font-style: italic;
+            margin: 0 10px;
+          }
         }
 
         .delete {
