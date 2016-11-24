@@ -12,7 +12,7 @@ class Task extends React.Component {
     return (
       <li>
         <button onClick={this.removeTask(list, index)}>
-          <span className="fa fa-trash-o" />
+          <span className="icon-trash" />
         </button>
         <span>{ details }</span>
       </li>

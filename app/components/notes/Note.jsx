@@ -31,7 +31,7 @@ class Note extends React.Component {
           </Link>
 
           <button className="delete" onClick={this.remove(index)}>
-            <span className="fa fa-trash-o" />
+            <span className="icon-trash" />
           </button>
         </div>
       );

@@ -38,7 +38,6 @@ const Register = React.createClass({
     const errors = this.state.error ? <p> {this.state.error} </p> : '';
     return (
       <div className="text-center">
-        <h1>Logo</h1>
         <form className="form form-account" onSubmit={this.handleSubmit}>
           <input className="form-control" ref="email" placeholder="Email"/>
           <input ref="pw" type="password" className="form-control" placeholder="Password" />

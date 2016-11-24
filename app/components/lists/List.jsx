@@ -31,7 +31,7 @@ class List extends React.Component {
           <h3>{details.name}</h3>
 
           <button className="delete" onClick={this.removeList(index)}>
-            <span className="fa fa-trash-o" />
+            <span className="icon-trash" />
           </button>
         </div>
 

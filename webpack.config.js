@@ -70,9 +70,16 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.(jpe?g|gif|png)$/,
+        test: /\.(jpe?g|gif|png|svg)$/,
         loader: 'file-loader?name=assets/images/[name].[ext]',
       },
+      {
+        test: /\.woff(2)?(\?[a-z0-9]+)?$/,
+        loader: "file-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]"
+      }, {
+        test: /\.(ttf|eot)(\?[a-z0-9]+)?$/,
+        loader: "file-loader?name=assets/fonts/[name].[ext]"
+      }
     ],
   },
 
