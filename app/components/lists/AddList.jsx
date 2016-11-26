@@ -2,21 +2,17 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 class AddList extends React.Component {
-  handleSubmit(e) {
-    if (e.keyCode === 13) {
-      this.props.add(ReactDOM.findDOMNode(this.refs.newItem).value);
-      ReactDOM.findDOMNode(this.refs.newItem).value = '';
+  handleAdd(e) {
+    let name = window.prompt('What is the name of the list?', 'Todo');
+
+    if (name !== '') {
+      this.props.add(name);
     }
   }
+
   render() {
     return (
-      <div className="form form-tasks">
-        <input type="text"
-          ref="newItem"
-          placeholder="New Item"
-          onKeyDown={this.handleSubmit.bind(this)}
-        />
-      </div>
+      <a className="btn" onClick={this.handleAdd.bind(this)}>+</a>
     );
   }
 }

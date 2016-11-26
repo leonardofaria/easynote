@@ -12,7 +12,8 @@ class Task extends React.Component {
     return (
       <li>
         <button onClick={this.removeTask(list, index)}>
-          <span className="icon-trash" />
+          <span className="circle" />
+          <span className="delete"><span className="icon-trash" /></span>
         </button>
         <span>{ details }</span>
       </li>

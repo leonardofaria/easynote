@@ -20,6 +20,8 @@ body {
 }
 
 input, textarea, select, button {
+  background: transparent;
+  border: 0;
   border-radius: 0;
   -webkit-appearance: none;
 
@@ -53,6 +55,7 @@ input, textarea, select, button {
   .btn {
     background: #ccc;
     border: 0;
+    cursor: pointer;
     font-size: 0.8rem;
     padding: 10px 25px;
 
@@ -140,7 +143,7 @@ aside {
   ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 80px 0 0 0;
 
     li {
       margin: 0;
@@ -325,16 +328,127 @@ main {
     width: calc(33.33% - 1px);
 
     h3 {
-      margin-left: 20px;
+      margin: 0;
+      padding: 0 0 0 20px;
     }
 
-    .list {
-      margin-top: 1px solid #ccc;
-      padding-left: 20px;
+    .toolbar {
+      margin-right: 20px;
+    }
 
-      h3 {
-        font-size: 1.5rem;
-        text-transform: inherit;
+    .lists {
+      position: relative;
+
+      .list {
+        background: #fafafa;
+        border-top: 1px solid #ccc;
+        height: calc(100vh - 120px);
+        padding: 20px 0 0 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        transition: all 0.25s;
+
+        &.active {
+          top: 0 !important;
+          z-index: 100;
+        }
+
+        @for $i from 1 through 10 {
+          &:nth-of-type(#{$i}) {
+            // height: calc(100vh - ((#{$i} - 1) * 50px));
+            top: calc((#{$i} - 1) * 70px);
+            z-index: $i;
+            animation: calc((#{$i - 1}) / 10s) ease-out alpha, 0.5s ease-out calc((#{$i - 1}) / 10s) appear;
+          }
+
+          &.inactive {
+            z-index: 1000;
+
+            &:nth-of-type(#{$i}) {
+              left: calc(#{$i} * 1px);
+              top: calc(600px + (#{$i} * 2));
+              width: calc(100% - (#{$i} * 2)px);
+            }
+          }
+        }
+
+        .toolbar {
+          h3 {
+            font-size: 1.5rem;
+            text-transform: inherit;
+          }
+
+          button {
+            display: none;
+          }
+        }
+
+        &:hover {
+          .toolbar {
+            button {
+              display: block;
+            }
+          }
+        }
+
+        ul {
+          list-style: none;
+          margin: 0 0 20px 0;
+          padding: 0;
+
+          li {
+            align-items: center;
+            display: flex;
+            justify-content: flex-start;
+            margin: 15px 0 0 0;
+            padding: 0;
+
+            input {
+              flex-grow: 1;
+              margin-right: 20px;
+            }
+
+            button, label {
+              color: #666;
+              margin: 0 20px 0 20px;
+              width: 16px;
+              text-align: center;
+            }
+
+            button {
+              align-items: center;
+              display: flex;
+              justify-content: center;
+
+              .circle {
+                border: 1px solid #666;
+                border-radius: 50%;
+                flex-basis: 14px;
+                height: 14px;
+                width: 14px;
+              }
+
+              .delete {
+                display: none;
+                height: 14px;
+                justify-content: center;
+                align-items: center;
+                text-align: right;
+              }
+
+              &:hover {
+                .circle {
+                  display: none;
+                }
+
+                .delete {
+                  display: flex;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -368,4 +482,13 @@ body.page-login, body.page-register {
       top: initial;
     }
   }
+}
+
+@keyframes appear {
+  0% { top: 1000px; }
+}
+
+@keyframes alpha {
+  0% { opacity: 0; top: 1000px; }
+  100% { opacity: 1; top: 1000px; }
 }

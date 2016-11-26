@@ -14,12 +14,16 @@ const Link = ReactRouter.Link;
 class Lists extends React.Component {
   constructor(props) {
     super(props);
+
+    const user = base.auth().currentUser;
+    console.log(`user: ` + user);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleRemoveList = this.handleRemoveList.bind(this);
     this.handleRemoveTask = this.handleRemoveTask.bind(this);
     this.state = {
       lists: [],
       loading: true,
+      user: user,
     };
   }
 
@@ -43,7 +47,7 @@ class Lists extends React.Component {
     const user = base.auth().currentUser.uid;
     const tasks = ['task 1', 'task 2'];
 
-    lists[`list-${timestamp}`] = { name, user, tasks };
+    lists[`list-${timestamp}`] = { name, user };
     this.setState({ lists });
   }
 
@@ -75,28 +79,49 @@ class Lists extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="toolbar main-toolbar">
-          <h3>My Lists</h3>
-          <AddList add={this.handleAddList.bind(this)} />
+    const user = this.state.user;
+    // console.dir(user);
+
+    const lists = this.state.lists;
+
+    // console.log(Object.keys(lists));
+
+    Object.keys(lists).map(list => {
+      console.dir(lists[list]);
+      console.log(lists[list].user);
+    });
+
+    const currentUser = base.auth().currentUser; //.uid;
+    const isOwner = true;
+
+    if (isOwner) {
+      return (
+        <div>
+          <div className="toolbar main-toolbar">
+            <h3>My Lists</h3>
+            <AddList add={this.handleAddList.bind(this)} />
+          </div>
+          <div className="lists">
+            {this.state.loading === true ?
+              <Loading />
+            :
+              Object.keys(this.state.lists)
+                .map(key =>
+                  <List
+                    key={key}
+                    index={key}
+                    details={this.state.lists[key]}
+                    removeList={this.handleRemoveList}
+                    removeTask={this.handleRemoveTask}
+                    addTask={this.handleAddTask}
+                  />)
+            }
+          </div>
         </div>
-        {this.state.loading === true ?
-          <Loading />
-        :
-          Object.keys(this.state.lists)
-            .map(key =>
-              <List
-                key={key}
-                index={key}
-                details={this.state.lists[key]}
-                removeList={this.handleRemoveList}
-                removeTask={this.handleRemoveTask}
-                addTask={this.handleAddTask}
-              />)
-        }
-      </div>
-    );
+      );
+    }
+
+    return false;
   }
 }
 

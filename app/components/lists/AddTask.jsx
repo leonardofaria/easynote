@@ -18,12 +18,15 @@ class AddTask extends React.Component {
   }
 
   render() {
+    const key = `new_${this.props.list}`;
+
     return (
       <li>
+        <label htmlFor={key}>+</label>
         <input
           type="text"
+          id={key}
           ref={(c) => { this.task = c; }}
-          placeholder="New Task"
           onKeyDown={this.handleSubmit}
         />
       </li>
