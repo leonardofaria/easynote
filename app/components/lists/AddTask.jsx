@@ -36,7 +36,7 @@ class AddTask extends React.Component {
 
 AddTask.propTypes = {
   add: React.PropTypes.func.isRequired,
-  list: React.PropTypes.string.isRequired,
+  list: React.PropTypes.number.isRequired,
 };
 
 module.exports = AddTask;

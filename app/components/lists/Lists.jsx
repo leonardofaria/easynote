@@ -1,6 +1,7 @@
+import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as config from '../../../firebase.config';
 
-const React = require('react');
 const ReactDOM = require('react-dom');
 const Rebase = require('re-base');
 const List = require('./List');
@@ -14,16 +15,13 @@ const Link = ReactRouter.Link;
 class Lists extends React.Component {
   constructor(props) {
     super(props);
-
-    const user = base.auth().currentUser;
-    console.log(`user: ` + user);
+    this.handleAddList = this.handleAddList.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleRemoveList = this.handleRemoveList.bind(this);
     this.handleRemoveTask = this.handleRemoveTask.bind(this);
     this.state = {
       lists: [],
       loading: true,
-      user: user,
     };
   }
 
@@ -31,8 +29,10 @@ class Lists extends React.Component {
     this.ref = base.syncState('lists', {
       context: this,
       state: 'lists',
+      asArray: true,
       then() {
-        this.setState({ loading: false });
+        const currentUser = base.auth().currentUser;
+        this.setState({ loading: false, currentUser: currentUser.uid });
       },
     });
   }
@@ -79,49 +79,43 @@ class Lists extends React.Component {
   }
 
   render() {
-    const user = this.state.user;
-    // console.dir(user);
-
-    const lists = this.state.lists;
-
-    // console.log(Object.keys(lists));
-
-    Object.keys(lists).map(list => {
-      console.dir(lists[list]);
-      console.log(lists[list].user);
+    const lists = this.state.lists.map((list, i) => {
+      if (this.state.currentUser === list.user) {
+        return (
+          <List
+            key={list.key}
+            index={i}
+            details={list}
+            removeList={this.handleRemoveList}
+            removeTask={this.handleRemoveTask}
+            addTask={this.handleAddTask}
+          />
+        );
+      }
+      return false;
     });
 
-    const currentUser = base.auth().currentUser; //.uid;
-    const isOwner = true;
-
-    if (isOwner) {
-      return (
-        <div>
-          <div className="toolbar main-toolbar">
-            <h3>My Lists</h3>
-            <AddList add={this.handleAddList.bind(this)} />
-          </div>
-          <div className="lists">
-            {this.state.loading === true ?
-              <Loading />
-            :
-              Object.keys(this.state.lists)
-                .map(key =>
-                  <List
-                    key={key}
-                    index={key}
-                    details={this.state.lists[key]}
-                    removeList={this.handleRemoveList}
-                    removeTask={this.handleRemoveTask}
-                    addTask={this.handleAddTask}
-                  />)
-            }
-          </div>
+    return (
+      <div>
+        <div className="toolbar main-toolbar">
+          <h3>My Lists</h3>
+          <AddList add={this.handleAddList} />
         </div>
-      );
-    }
-
-    return false;
+        <div className="lists">
+          {this.state.loading === true ?
+            <Loading />
+          :
+            <ReactCSSTransitionGroup
+              transitionName="list-animation"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}
+            >
+              {lists}
+            </ReactCSSTransitionGroup>
+          }
+        </div>
+      </div>
+    );
   }
 }
 

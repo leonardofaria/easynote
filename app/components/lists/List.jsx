@@ -7,6 +7,12 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.removeList = index => this.props.removeList.bind(null, index);
+    this.toggleClass = this.toggleClass.bind(this);
+    this.state = { active: false };
+  }
+
+  toggleClass() {
+    this.setState({ active: !this.state.active });
   }
 
   render() {
@@ -22,13 +28,16 @@ class List extends React.Component {
           list={index}
           removeTask={this.props.removeTask}
         />)
-      )
+      );
     }
 
+    let className = this.state.active ? 'active' : '';
+    className += ' list';
+
     return (
-      <div className="list">
+      <div className={className}>
         <div className="toolbar">
-          <h3>{details.name}</h3>
+          <h3 onClick={this.toggleClass}>{details.name}</h3>
 
           <button className="delete" onClick={this.removeList(index)}>
             <span className="icon-trash" />
@@ -45,7 +54,7 @@ class List extends React.Component {
 }
 
 List.propTypes = {
-  index: React.PropTypes.string.isRequired,
+  index: React.PropTypes.number.isRequired,
   details: React.PropTypes.object.isRequired,
   addTask: React.PropTypes.func.isRequired,
   removeTask: React.PropTypes.func.isRequired,
