@@ -2,17 +2,22 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 class AddList extends React.Component {
-  handleAdd(e) {
-    let name = window.prompt('What is the name of the list?', 'Todo');
+  constructor(props) {
+    super(props);
+    this.handleAdd = this.handleAdd.bind(this);
+  }
 
-    if (name !== '') {
+  handleAdd(e) {
+    const name = window.prompt('What is the name of the list?', 'Todo');
+
+    if (name !== '' && name !== null) {
       this.props.add(name);
     }
   }
 
   render() {
     return (
-      <a className="btn" onClick={this.handleAdd.bind(this)}>+</a>
+      <button className="btn" onClick={this.handleAdd}>+</button>
     );
   }
 }
