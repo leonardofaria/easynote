@@ -91,6 +91,12 @@ input, textarea, select, button {
     text-align: center;
     width: 265px;
 
+    p {
+      color: red;
+      font-size: 0.75rem;
+      margin-bottom: 20px;
+    }
+
     input {
       background: #fff;
       display: block;
